@@ -88,7 +88,7 @@ const App = (props) => {
   )
 }
 
-let counter = 1
+//let counter = 1
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
