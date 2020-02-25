@@ -1,17 +1,6 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-const Hello = (props) => {
-  return (
-    <div>
-      <p>
-        Hello {props.name}, you are {props.age} years old
-      </p>
-=======
-=======
->>>>>>> Stashed changes
 
 const Display=(props)=>{
   return(
@@ -29,8 +18,6 @@ const Hello = (props) => {
   const {name, age } = props
   const bornYear= ()=> new Date().getFullYear()-age
 
-  
-
   // const bornYear = () =>{
   //   const yearNow = new Date().getFullYear()
   //   return yearNow - props.age
@@ -42,31 +29,11 @@ const Hello = (props) => {
         Hello {name}, you are {age} years old
       </p>
       <p>So you were probably born in {bornYear()}</p>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     </div>
   )
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-const App = () => {
-  const name = 'Peter'
-  const age = 10
 
-  return (
-    <div>
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
-      <Hello name={name} age={age} />
-    </div>
-  )
-}
-=======
-=======
->>>>>>> Stashed changes
 
 const App = (props) => {
   const name = 'Isaac'
