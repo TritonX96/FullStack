@@ -1,111 +1,74 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 
-
-const Display=(props)=>{
-  return(
-    <div> This is the counter of {props.counter}</div>
-  )
-}
-
-const Button = ({onClick,text})=>(
-  <button onClick={onClick}>{text}</button>
-)
-
-const Hello = (props) => {
-  // const name = props.name
-  // const age = props.age
-  const {name, age } = props
-  const bornYear= ()=> new Date().getFullYear()-age
-
-  // const bornYear = () =>{
-  //   const yearNow = new Date().getFullYear()
-  //   return yearNow - props.age
-  // }
-
+const Statistic = ({text,value}) =>{
   return (
-    <div>
-      <p>
-        Hello {name}, you are {age} years old
-      </p>
-      <p>So you were probably born in {bornYear()}</p>
-    </div>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
-
+const Statistics = ({ good, neutral, bad }) => {
+  let all = good + neutral + bad;
+  let average = (good + bad * (-1)) / all;
+  let positive = (good / all) * 100;
+  
+  if ((good || neutral || bad) !== 0) {
+    return (
+      <table>
+        <tbody>
+          <Statistic text="good" value={good} />
+          <Statistic text="neutral" value={neutral} />
+          <Statistic text="bad" value={bad} />
+          <Statistic text="all" value={all} />
+          <Statistic text="average" value={average} />
+          <Statistic text="positive" value={positive} />
+        </tbody>
+      </table>
+    );
+  }
+  
+  return <div>No feedback given</div>
+}
 
 const App = (props) => {
-  const name = 'Isaac'
-  const age = 24
-  const prop = {
-    name: 'ZR',
-    age: 21,
-  }
 
+  //Save clicks of each button to own state
+  const [good, setGood] = useState(0)
+  const[bad, setBad] = useState(0)
+  const [neutral, setNeutral] = useState(0)
 
+  const handleGood=()=>setGood(good+1);
+  const handleBad=()=>setBad(bad+1);
+  const handleNeutral=()=>setNeutral(neutral+1);
 
-  // const handleClick=()=>{
-  //   console.log('Clicked')
-  // }
-  const [counter, setCounter] = useState(0)
-  const setToValue = (value) => {
-    return () => {
-      setCounter(value)
-    }
-  }
-  setTimeout(
-      ()=> setCounter(counter+1),
-      1000
+  const Button = ({text, onClickButton})=>{
+    return(
+      <button onClick={onClickButton}>{text}</button>
     )
-    console.log('rendering....', counter)
-
-
+  }
+ 
   return (
     <div>
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
-      <Hello name={name} age={age} />
-      <Hello name={prop.name} age={prop.age} />
-      <Display counter={counter+10}/>
-      <br></br>
-      
-      {counter}
-      <br></br>
-      <br></br>
-      <Button onClick={() => 
-        setToValue(counter + 1)}        
-        text='plus'
-        />      
-      <Button onClick={() => setToValue(counter - 1)}        
-      text='minus'
-      />      
-      <Button onClick={() => setToValue(0)}
-      text='zero'
-      />
+      <h1>Give Feedback</h1>
+
+      <Button onClickButton={handleGood} text='Good'/>
+      <Button onClickButton={handleBad} text='Bad'/>
+      <Button onClickButton={handleNeutral} text='Neutral'/>
+
+      <br/>
+      <h2>Statistics</h2>
+      <Statistics good={good} neutral={neutral} bad={bad} />
+
     </div>
     
   )
 }
 
-//let counter = 1
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
 
-// setInterval(()=>{
-//   refresh()
-//   counter += 1
-// },1000)
-
-// refresh()
-// console.log(counter)
-// counter+=1
-// refresh()
-// console.log(counter)
-// counter+=1
-// refresh()
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
